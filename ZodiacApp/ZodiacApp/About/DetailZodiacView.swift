@@ -11,16 +11,24 @@ struct DetailZodiacView: View {
     let zodiac: Zodiac
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            
-            Text(zodiac.name)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            Text(zodiac.description)
-                .font(.body)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                
+                Image(zodiac.name)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 400, height: 400)
+                
+                Text(zodiac.description)
+                    .font(.body)
+                    .lineLimit(nil) // Allow unlimited lines
+                    .multilineTextAlignment(.leading)
+            }
+            .padding()
         }
-        .padding()
         .navigationTitle(zodiac.name)
+        .font(.headline)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

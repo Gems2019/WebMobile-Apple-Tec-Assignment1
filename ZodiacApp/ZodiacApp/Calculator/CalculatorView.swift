@@ -37,50 +37,76 @@ struct CalculatorView: View {
                 Section {
                     Text(validationMessage)
                         .foregroundColor(.red)
+                        .onAppear {
+                            print("Validation message UI appeared: \(validationMessage)")
+                        }
                 }
             }
             
-            // Show DetailZodiacView injected directly when zodiac is determined
+            // Show ZodiacDetailCalculatorView when zodiac is determined
             if let zodiac = selectedZodiac {
-                Section(header: Text("Your Zodiac Sign")) {
-                    DetailZodiacView(zodiac: zodiac)
-                }
+                ZodiacDetailCalculatorView(zodiac: zodiac)
             }
         }
     }
     
     private func validateInput() {
+        print("validateInput() called") // Debug print
         let trimmedYearString = birthYearString.trimmingCharacters(in: .whitespaces)
         
         guard !trimmedYearString.isEmpty else {
-            validationMessage = "Please enter a birth year."
+            DispatchQueue.main.async {
+                validationMessage = "Please enter a birth year."
+                selectedZodiac = nil
+            }
+            print("Validation failed: empty input")
             return
         }
         
         guard trimmedYearString.count == 4 else {
-            validationMessage = "Please enter a valid 4-digit birth year."
+            DispatchQueue.main.async {
+                validationMessage = "Please enter a valid 4-digit birth year."
+                selectedZodiac = nil
+            }
+            print("Validation failed: not 4 digits")
             return
         }
         
         guard let birthYear = Int(trimmedYearString) else {
-            validationMessage = "Please enter a valid 4-digit birth year."
+            DispatchQueue.main.async {
+                validationMessage = "Please enter a valid 4-digit birth year."
+                selectedZodiac = nil
+            }
+            print("Validation failed: not a number")
             return
         }
         
         guard birthYear >= 1700 && birthYear <= 2025 else {
-            validationMessage = "Please enter a birth year between 1700 and 2025."
+            DispatchQueue.main.async {
+                validationMessage = "Please enter a birth year between 1700 and 2025."
+                selectedZodiac = nil
+            }
+            print("Validation failed: year out of range")
             return
         }
         
         let userZodiacSign = findZodiacSign(forYear: birthYear)
-        selectedZodiac = findZodiacObject(for: userZodiacSign)
-        validationMessage = "" // Clear validation message on successful input
+        print("Found zodiac sign: \(userZodiacSign)") // Debug print
+        let zodiacObject = findZodiacObject(for: userZodiacSign)
+        print("Selected zodiac object: \(zodiacObject?.name ?? "nil")") // Debug print
+        
+        DispatchQueue.main.async {
+            selectedZodiac = zodiacObject
+            validationMessage = "" // Clear validation message on successful input
+        }
+        print("Validation message cleared, selectedZodiac set")
     }
     
     private func findZodiacSign(forYear year: Int) -> String {
-        let zodiac = year % 12
+        // Chinese Zodiac calculation: 1900 is Rat (year 0), so we offset by 1900
+        let zodiacIndex = (year - 1900) % 12
         
-        switch zodiac {
+        switch zodiacIndex {
         case 0:
             return "Rat"
         case 1:
@@ -103,8 +129,10 @@ struct CalculatorView: View {
             return "Rooster"
         case 10:
             return "Dog"
-        default:
+        case 11:
             return "Pig"
+        default:
+            return "Rat" // Fallback, though this shouldn't happen
         }
     }
     
