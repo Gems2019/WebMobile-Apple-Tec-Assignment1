@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         TabView{
            
-            Text("Home").tabItem {
+            ZodiacView().tabItem {
                 Image(systemName: "house")
                 Text("Home")
             }.tag(1)
@@ -26,7 +26,7 @@ struct ContentView: View {
                 Text("Calculator")
             }.tag(2)
             
-            ZodiacView().tabItem {
+            Text("About").tabItem {
                 Image(systemName: "sun.max")
                 Text("About")
             }.tag(3)
