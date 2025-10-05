@@ -14,10 +14,11 @@ struct ZodiacView: View {
         NavigationView {
             List(zodiacSigns, id: \.name) { zodiac in
                 NavigationLink(destination: DetailZodiacView(zodiac: zodiac)) {
-                    Image("logo") // Use the name you gave it in Assets
+                    Image(zodiac.name) // Dynamically use zodiac name for image
                        .resizable()
                        .scaledToFit()
                        .frame(width: 100, height: 100)
+                    Spacer()
                     Text(zodiac.name)
                         .padding(.vertical, 4)
                 }
