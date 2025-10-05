@@ -16,7 +16,7 @@ struct ValidationResult {
 class ZodiacUtils {
     
     static func validateYear(_ yearString: String) -> ValidationResult {
-        print("validateYear() called") // Debug print
+        print("validateYear() called") 
         let trimmedYearString = yearString.trimmingCharacters(in: .whitespaces)
         
         guard !trimmedYearString.isEmpty else {
@@ -40,17 +40,16 @@ class ZodiacUtils {
         }
         
         let userZodiacSign = findZodiacSign(forYear: birthYear)
-        print("Found zodiac sign: \(userZodiacSign)") // Debug print
+        print("Found zodiac sign: \(userZodiacSign)")
         let zodiacObject = findZodiacObject(for: userZodiacSign)
-        print("Selected zodiac object: \(zodiacObject?.name ?? "nil")") // Debug print
+        print("Selected zodiac object: \(zodiacObject?.name ?? "nil")")
         
         return ValidationResult(isValid: true, errorMessage: "", zodiac: zodiacObject)
     }
     
     static func findZodiacSign(forYear year: Int) -> String {
-        // Chinese Zodiac calculation: 1900 is Rat (year 0), so we offset by 1900
-        let zodiacIndex = (year - 1900) % 12
-        
+        let zodiacIndex = (year - 4) % 12
+
         switch zodiacIndex {
         case 0:
             return "Rat"
@@ -74,10 +73,8 @@ class ZodiacUtils {
             return "Rooster"
         case 10:
             return "Dog"
-        case 11:
-            return "Pig"
         default:
-            return "Rat"
+            return "Pig"
         }
     }
     
