@@ -64,9 +64,36 @@ struct CalculatorView: View {
         zodiacSign = userZodiacSign
     }
     
-//    private func findZodiacSign(forYear year: Int) -> String {
-//        if year % 12
-//    }
+    private func findZodiacSign(forYear year: Int) -> String {
+        let zodiac = year % 12
+        
+        switch zodiac {
+        case 0:
+            return "Rat"
+        case 1:
+            return "Ox"
+        case 2:
+            return "Tiger"
+        case 3:
+            return "Rabbit"
+        case 4:
+            return "Dragon"
+        case 5:
+            return "Snake"
+        case 6:
+            return "Horse"
+        case 7:
+            return "Goat"
+        case 8:
+            return "Monkey"
+        case 9:
+            return "Rooster"
+        case 10:
+            return "Dog"
+        default:
+            return "Pig"
+        }
+    }
 }
 
 #Preview {
