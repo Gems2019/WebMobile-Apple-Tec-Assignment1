@@ -24,9 +24,7 @@ struct CalculatorView: View {
                 Button("Submit") {
                     validateInput()
                 }
-                
                 Spacer()
-                
                 Button("Reset") {
                     birthYearString = ""
                     validationMessage = ""
