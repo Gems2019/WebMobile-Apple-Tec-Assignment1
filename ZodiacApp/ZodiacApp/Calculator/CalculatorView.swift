@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct CalculatorView: View {
     @State private var birthYearString: String = "" // holds user input
     @State private var validationMessage: String = ""
-    @State private var zodiacSign: String?
+    @State private var selectedZodiac: Zodiac?
     
     var body: some View {
         Form {
@@ -23,6 +24,13 @@ struct CalculatorView: View {
                 Button("Submit") {
                     validateInput()
                 }
+                
+                Button("Reset") {
+                    birthYearString = ""
+                    validationMessage = ""
+                    zodiacSign = nil
+                    selectedZodiac = nil
+                }
             }
             
             if !validationMessage.isEmpty {
@@ -32,8 +40,12 @@ struct CalculatorView: View {
                 }
             }
             
-            // show DetailZodiacView
-            
+            // Show DetailZodiacView injected directly when zodiac is determined
+            if let zodiac = selectedZodiac {
+                Section(header: Text("Your Zodiac Sign")) {
+                    DetailZodiacView(zodiac: zodiac)
+                }
+            }
         }
     }
     
@@ -61,7 +73,8 @@ struct CalculatorView: View {
         }
         
         let userZodiacSign = findZodiacSign(forYear: birthYear)
-        zodiacSign = userZodiacSign
+        selectedZodiac = findZodiacObject(for: userZodiacSign)
+        validationMessage = "" // Clear validation message on successful input
     }
     
     private func findZodiacSign(forYear year: Int) -> String {
@@ -93,6 +106,10 @@ struct CalculatorView: View {
         default:
             return "Pig"
         }
+    }
+    
+    private func findZodiacObject(for signName: String) -> Zodiac? {
+        return zodiacData.first { $0.name == signName }
     }
 }
 
