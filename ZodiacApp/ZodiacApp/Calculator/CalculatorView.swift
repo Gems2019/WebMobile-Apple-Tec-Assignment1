@@ -20,18 +20,20 @@ struct CalculatorView: View {
                     .keyboardType(.numberPad)
             }
             
-            Section {
+            HStack {
                 Button("Submit") {
                     validateInput()
                 }
                 
+                Spacer()
+                
                 Button("Reset") {
                     birthYearString = ""
                     validationMessage = ""
-                    zodiacSign = nil
                     selectedZodiac = nil
                 }
             }
+            .padding(.horizontal)
             
             if !validationMessage.isEmpty {
                 Section {
