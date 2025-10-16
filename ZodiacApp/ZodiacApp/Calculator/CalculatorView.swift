@@ -29,12 +29,24 @@ struct CalculatorView: View {
                     }
                     print("Validation message cleared, selectedZodiac set")
                 }
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Color.blue)
+                .cornerRadius(8)
+                
                 Spacer()
+                
                 Button("Reset") {
                     birthYearString = ""
                     validationMessage = ""
                     selectedZodiac = nil
                 }
+                .foregroundColor(.blue)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(8)
             }
             .padding(.horizontal)
             

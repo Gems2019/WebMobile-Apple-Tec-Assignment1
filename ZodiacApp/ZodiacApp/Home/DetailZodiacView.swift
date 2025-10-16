@@ -12,22 +12,24 @@ struct DetailZodiacView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .center, spacing: 20) {
                 
                 Image(zodiac.name)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 400, height: 400)
+                    .clipShape(Circle())
+                    .shadow(color: .blue.opacity(0.3), radius: 3, x: 0, y: 2)
                 
                 Text(zodiac.description)
                     .font(.body)
                     .lineLimit(nil) // Allow unlimited lines
                     .multilineTextAlignment(.leading)
+                    .padding()
             }
             .padding()
         }
         .navigationTitle(zodiac.name)
-        .font(.headline)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -12,18 +12,18 @@ struct ZodiacDetailCalculatorView: View {
     
     var body: some View {
         Section(header: Text("Your Zodiac Sign")) {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .center, spacing: 15) {
                 Text(zodiac.name)
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.blue)
                 
-                HStack {
-                    Spacer()
-                    Image(zodiac.name)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 150)
-                    Spacer()
-                }
+                Image(zodiac.name)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .shadow(color: .blue.opacity(0.3), radius: 3, x: 0, y: 2)
                 
                 Text(zodiac.description)
                     .font(.body)
@@ -31,8 +31,8 @@ struct ZodiacDetailCalculatorView: View {
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical, 12)
             .onAppear {
                 print("DetailZodiacView UI appeared for: \(zodiac.name)")
             }
