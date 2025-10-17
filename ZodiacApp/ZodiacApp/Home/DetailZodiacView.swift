@@ -23,12 +23,14 @@ struct DetailZodiacView: View {
                 
                 Text(zodiac.description)
                     .font(.body)
-                    .lineLimit(nil) // Allow unlimited lines
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(nil)
                     .multilineTextAlignment(.leading)
                     .padding()
             }
             .padding()
         }
+        .background(Color("AppBackgroundColor"))
         .navigationTitle(zodiac.name)
         .navigationBarTitleDisplayMode(.inline)
     }

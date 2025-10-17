@@ -14,11 +14,14 @@ struct CalculatorView: View {
     @State private var selectedZodiac: Zodiac?
     
     var body: some View {
-        Form {
-            Section (header: Text("Enter your birth year")){
-                TextField("User birth year", text: $birthYearString)
-                    .keyboardType(.numberPad)
-            }
+        ZStack {
+            Color("AppBackgroundColor").ignoresSafeArea()
+            
+            Form {
+                Section (header: Text("Enter your birth year")){
+                    TextField("User birth year", text: $birthYearString)
+                        .keyboardType(.numberPad)
+                }
             
             HStack {
                 Button("Submit") {
@@ -64,6 +67,9 @@ struct CalculatorView: View {
             if let zodiac = selectedZodiac {
                 ZodiacDetailCalculatorView(zodiac: zodiac)
             }
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
         }
     }
     
