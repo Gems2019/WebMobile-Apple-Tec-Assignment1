@@ -11,43 +11,39 @@ struct ZodiacView: View {
     @State var zodiacSigns: [Zodiac] = []
     
     var body: some View {
-        
-        ZStack {
-            Color("AppBackgroundColor").ignoresSafeArea()
-            
-            NavigationView {
-                List(zodiacSigns, id: \.name) { zodiac in
-                    NavigationLink(destination: DetailZodiacView(zodiac: zodiac)) {
-                        HStack(spacing: 15) {
-                            Image(zodiac.name) // Dynamically use zodiac name for image
-                               .resizable()
-                               .scaledToFit()
-                               .frame(width: 100, height: 100)
-                               .clipShape(Circle())
-                               .shadow(color: .blue.opacity(0.3), radius: 3, x: 0, y: 2)
-                            
-                            Text(zodiac.name)
-                                .font(.title3)
-                                .fontWeight(.medium)
-                                .padding(.vertical, 4)
-                                .foregroundColor(.primary)
-                            
-                            Spacer()
-                        }
-                        .padding(.vertical, 10)
-                        .listRowBackground(Color.clear)
+        NavigationView {
+            List(zodiacSigns, id: \.name) { zodiac in
+                NavigationLink(destination: DetailZodiacView(zodiac: zodiac)) {
+                    HStack(spacing: 15) {
+                        Image(zodiac.name)
+                           .resizable()
+                           .scaledToFit()
+                           .frame(width: 100, height: 100)
+                           .clipShape(Circle())
+                           .shadow(color: .blue.opacity(0.3), radius: 3, x: 0, y: 2)
+                        
+                        Text(zodiac.name)
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .padding(.vertical, 4)
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
                     }
+                    .padding(.vertical, 10)
                     .listRowBackground(Color.clear)
                 }
-                .scrollContentBackground(.hidden)
-                .background(Color.clear)
-                .navigationTitle("Zodiac Signs")
-                .accentColor(.blue)
-                .onAppear {
-                    self.zodiacSigns = zodiacData // Use local zodiacData array
-                }
+                .listRowBackground(Color.clear)
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackgroundColor"))
+            .navigationTitle("Zodiac Signs")
+            .accentColor(.blue)
+            .onAppear {
+                self.zodiacSigns = zodiacData
             }
         }
+        .background(Color("AppBackgroundColor").ignoresSafeArea())
     }
 }
 
