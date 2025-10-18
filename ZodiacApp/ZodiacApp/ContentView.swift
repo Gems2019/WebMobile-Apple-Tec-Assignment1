@@ -21,7 +21,7 @@ struct ContentView: View {
             }.tag(1)
             
             CalculatorView().tabItem {
-                Image(systemName: "list.bullet")
+                Image(systemName: "calendar")
                 Text("Calculator")
             }.tag(2)
             
@@ -29,6 +29,16 @@ struct ContentView: View {
                 Image(systemName: "sun.max")
                 Text("About")
             }.tag(3)
+        }
+        .accentColor(Color.orange)
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(Color("Text"))
+            
+            // Set the appearance for all states
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
 

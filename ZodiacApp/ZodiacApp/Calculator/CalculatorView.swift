@@ -32,10 +32,10 @@ struct CalculatorView: View {
                     }
                     print("Validation message cleared, selectedZodiac set")
                 }
-                .foregroundColor(.white)
+                .foregroundColor(Color("AppBackgroundColor"))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(Color.blue)
+                .background(Color("Text"))
                 .cornerRadius(8)
                 
                 Spacer()
@@ -45,10 +45,10 @@ struct CalculatorView: View {
                     validationMessage = ""
                     selectedZodiac = nil
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(Color("Text"))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(Color.blue.opacity(0.1))
+                .background(Color("Text").opacity(0.1))
                 .cornerRadius(8)
             }
             .padding(.horizontal)

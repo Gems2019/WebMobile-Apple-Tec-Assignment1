@@ -15,6 +15,7 @@ struct ZodiacDetailCalculatorView: View {
             VStack(alignment: .center, spacing: 15) {
                 Text(zodiac.name)
                     .font(.title2)
+                    .foregroundColor(Color("Text"))
                     .fontWeight(.semibold)
                     .foregroundColor(.blue)
                 
@@ -27,12 +28,17 @@ struct ZodiacDetailCalculatorView: View {
                 
                 Text(zodiac.description)
                     .font(.body)
+                    .foregroundColor(Color("Text"))
                     .lineLimit(nil)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
+                    .padding(12)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 12)
+            .background(Color("CardBackgroundColor"))
+            .cornerRadius(12)
+            .shadow(radius: 5)
             .onAppear {
                 print("DetailZodiacView UI appeared for: \(zodiac.name)")
             }
